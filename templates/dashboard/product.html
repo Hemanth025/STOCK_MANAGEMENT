@@ -1,5 +1,5 @@
 {% extends 'partials/base.html' %}
-{% block title %}product page{% endblock %}
+{% block title %}Product page{% endblock %}
 
 {% load crispy_forms_tags %}
 {% block content %}
@@ -20,7 +20,7 @@
                     <form method="POST">
                         {% csrf_token %}
                         {{ form|crispy }}
-                        <input class="btn btn-success btn-block" 
+                        <input class="btn btn-success btn-block"
                             type="submit" value="Add Product">
                     </form>
                 </div>
@@ -31,7 +31,8 @@
                         <tr class="text-white">
                             <th scope="col">Name</th>
                             <th scope="col">Category</th>
-                            <th scope="col">Quantity</th>
+                            <th scope="col">Previous Quantity</th>
+                            <th scope="col">Updated Quantity</th>
                             <th scope="col">Activity</th>
                         </tr>
                     </thead>
@@ -40,13 +41,16 @@
                     <tr>
                     <td>{{item.name}}</td>
                     <td>{{item.category}}</td>
+                    <!-- Display previous quantity -->
                     <td>{{item.quantity}}</td>
+                    <!-- Display updated quantity -->
+                    <td>{{item.remaining_quantity}}</td>
                     <td>
-                        <a class="btn btn-info btn-sm" 
+                        <a class="btn btn-info btn-sm"
                             href="{% url 'dashboard-product-update' item.id %}">
                             Edit
                         </a>
-                        <a class="btn btn-danger btn-sm" 
+                        <a class="btn btn-danger btn-sm"
                             href="{% url 'dashboard-product-delete' item.id %}">
                             Delete
                         </a>
@@ -61,4 +65,3 @@
     </div>
     <!--End Table-->
 {% endblock %}
- 
